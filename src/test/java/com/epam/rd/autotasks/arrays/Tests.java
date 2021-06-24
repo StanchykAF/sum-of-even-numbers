@@ -16,6 +16,11 @@ public class Tests {
 
         assertEquals(18, actual);
 
+        array = new int[]{1, 3, 2, 8, 199, 15};
+        actual = SumOfEvenNumbers.sum(array);
+
+        assertEquals(202, actual);
+
         array = new int[10000];
         Arrays.fill(array, 1);
         actual = SumOfEvenNumbers.sum(array);
@@ -35,6 +40,14 @@ public class Tests {
 
         assertEquals(510, actual);
 
+        array = new int[10000];
+        Arrays.fill(array, 1);
+        array[15] = 2;
+        array[1432] = -100;
+        actual = SumOfEvenNumbers.sum(array);
+
+        assertEquals(4899, actual);
+
         array = new int[1001];
         Arrays.fill(array, -100);
         for (int i = 0; i < array.length; i+=2){
@@ -43,6 +56,16 @@ public class Tests {
         actual = SumOfEvenNumbers.sum(array);
 
         assertEquals(5010, actual);
+
+        array = new int[1001];
+        Arrays.fill(array, -100);
+        for (int i = 0; i < array.length; i+=2){
+            array[i] = 10;
+        }
+        array[14] = 200;
+        actual = SumOfEvenNumbers.sum(array);
+
+        assertEquals(5200, actual);
     }
 
     @Test
