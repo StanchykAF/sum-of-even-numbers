@@ -10,6 +10,8 @@ public class SumOfEvenNumbers {
 
     public static int sum(int[] array){
 
+        //put your code here
+
         throw new UnsupportedOperationException();
     }
 }
