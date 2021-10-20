@@ -1,16 +1,26 @@
 # Sum of even numbers
 
-Implement [com.epam.rd.autotasks.arrays.SumOfEvenNumbers](src/main/java/com/epam/rd/autotasks/arrays/SumOfEvenNumbers.java) method:
-<br><b>sum(int[] array)</b> - returns the sum of even numbers in a given array.
+The purpose of this exercise is to train you to work with arrays.
 
-- Method takes an array of integers as a parameter.
+Estimated workload of this exercise is _20 min_.
+
+### Description
+
+Please, proceed to the [SumOfEvenNumbers](src/main/java/com/epam/rd/autotasks/arrays/SumOfEvenNumbers.java) class and
+implement the `sum` method.
+
+The correct implementation should receive an array of `int` values and return the sum of even numbers.
+
+Details:
+
 - If given array is null or empty, method returns 0.
+- `sum` method must not modify the array.
+- Input array may contain any `int` value between `Integer.MIN_VALUE` and `Integer.MAX_VALUE`.
 
-Class [com.epam.rd.autotasks.arrays.SumOfEvenNumbers](src/main/java/com/epam/rd/autotasks/arrays/SumOfEvenNumbers.java)
- contains <b>public static void main(String[] args)</b>. 
- <br>You may use it to check your solution.
- 
- If you want ro run tests, you need to install 
- [maven](https://maven.apache.org/install.html) and run the below command
- in terminal from your project directory:
-  <br>`mvn clean test`
+### Example
+
+```java
+int[]vals = new int[]{-2,0,10,5};
+int result = SumOfEvenNumbers.sum(vals);
+System.out.println(result == 8); // true
+```
