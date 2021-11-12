@@ -20,7 +20,7 @@ Details:
 ### Example
 
 ```java
-int[]vals = new int[]{-2,0,10,5};
+int[]vals = new int[]{-2,10,0,5};
 int result = SumOfEvenNumbers.sum(vals);
 System.out.println(result == 8); // true
 ```
