@@ -2,94 +2,46 @@ package com.epam.rd.autotasks.arrays;
 
 import com.epam.rd.autotasks.arrays.SumOfEvenNumbers;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class Tests {
 
-    @Test
-    public void sumTest(){
-
-        int[] array;
-        int actual;
-
-        {
-            array = new int[]{1, 3, 2, 8, 15, 199};
-            actual = SumOfEvenNumbers.sum(array);
-
-            assertEquals(18, actual);
-        }
-
-        {
-            array = new int[]{1, 3, 2, 8, 199, 15};
-            actual = SumOfEvenNumbers.sum(array);
-
-            assertEquals(202, actual);
-        }
-
-        {
-            array = new int[10000];
-            Arrays.fill(array, 1);
-            actual = SumOfEvenNumbers.sum(array);
-
-            assertEquals(5000, actual);
-        }
-
-        {
-            array = new int[700];
-            actual = SumOfEvenNumbers.sum(array);
-
-            assertEquals(0, actual);
-        }
-
-        {
-            array = new int[1000];
-            Arrays.fill(array, 1);
-            array[0] = 11;
-            array[1] = -100;
-            actual = SumOfEvenNumbers.sum(array);
-
-            assertEquals(510, actual);
-        }
-
-        {
-            array = new int[10000];
-            Arrays.fill(array, 1);
-            array[15] = 2;
-            array[1432] = -100;
-            actual = SumOfEvenNumbers.sum(array);
-
-            assertEquals(4899, actual);
-        }
-
-        {
-            array = new int[1001];
-            Arrays.fill(array, -100);
-            for (int i = 0; i < array.length; i+=2){
-                array[i] = 10;
-            }
-            actual = SumOfEvenNumbers.sum(array);
-
-            assertEquals(5010, actual);
-        }
-
-        {
-            array = new int[1001];
-            Arrays.fill(array, -100);
-            for (int i = 0; i < array.length; i+=2){
-                array[i] = 10;
-            }
-            array[14] = 200;
-            actual = SumOfEvenNumbers.sum(array);
-
-            assertEquals(5200, actual);
-        }
+    @ParameterizedTest(name = "[{index}] [{0}]")
+    @MethodSource("testCases")
+    public void sumTest(int expected, int[] array) {
+        assertEquals(expected, SumOfEvenNumbers.sum(array));
     }
 
+    public static Stream<Arguments> testCases() {
+        return Stream.of(
+                arguments(10, new int[]{1, 3, 2, 8, 15, 199}),
+                arguments(208, new int[]{1, 3, 2, 8, 198, 15}),
+                arguments(0, IntStream.generate(() -> 1).limit(1000).toArray()),
+                arguments(2000, IntStream.generate(() -> 2).limit(1000).toArray()),
+                arguments(0, IntStream.generate(() -> 0).limit(1000).toArray()),
+                arguments(250500, IntStream.iterate(1, i -> i + 1).limit(1000).toArray()),
+                arguments(4840, IntStream.iterate(1, i -> i + 3).limit(80).toArray()),
+                arguments(1048574, IntStream.iterate(1, i -> i + i).limit(20).toArray()),
+                arguments(0, IntStream.iterate(1, i -> -i).limit(80).toArray()),
+                arguments(-1560, IntStream.iterate(1, i -> i - 1).limit(80).toArray()),
+                arguments(50, IntStream.iterate(50, i -> i - 1).limit(100).toArray()),
+                arguments(-4900, IntStream.iterate(50, i -> i - 2).limit(100).toArray()),
+                arguments(-4850, IntStream.iterate(50, i -> i - 3).limit(100).toArray())
+        );
+    }
+
+
     @Test
-    public void nullOrEmptyTest(){
+    public void nullOrEmptyTest() {
         int[] nullArray = null;
         int[] emptyArray = new int[0];
 
